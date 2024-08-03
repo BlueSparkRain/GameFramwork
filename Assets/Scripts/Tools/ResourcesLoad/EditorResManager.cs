@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -24,7 +25,12 @@ public class EditorResManager : BaseSingletonManager<EditorResManager>
     //1.加载单个资源
     public T LoadEditorRes<T>(string path) where T : Object
     {
-        T res = AssetDatabase.LoadAssetAtPath<T>(rootPath + path);
+        string suffixName = "";
+        if (typeof(T) == typeof(GameObject)) 
+        {
+            suffixName = ".prefab";
+        }
+        T res = AssetDatabase.LoadAssetAtPath<T>(rootPath + path+suffixName);
         return res;
     }
 
