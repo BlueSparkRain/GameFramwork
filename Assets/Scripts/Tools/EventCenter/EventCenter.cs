@@ -15,44 +15,8 @@ public class EventCenter : BaseSingletonManager<EventCenter>
     /// 2.添加、移除事件监听者
     /// 3.清除所有事件监听者
     /// </summary>
-    #region 方案一:通过object里氏替换来传递多类型参数（存在装箱拆箱，性能开销大，且在观察者脚本内需要监听的函数中需要将info as为所需传递的指定类型）
-    // private Dictionary<string,UnityAction<object>> EventDic = new Dictionary<string,UnityAction<object>>();
-
-
-    // public void EventTrigger(string eventName,object info=null) 
-    // {
-    //    if (EventDic.ContainsKey(eventName))
-    //       EventDic[eventName]?.Invoke(info);
-    // }
-
-    // public void AddEventListener(string eventName,UnityAction<object> func)
-
-    // {
-    //     if (EventDic.ContainsKey(eventName))
-    //         EventDic[eventName] += func;
-    //     else
-    //     {
-    //         EventDic.Add(eventName, null);
-    //         EventDic[eventName] += func;
-    //     }
-    // }
-    //public  void RemoveEventListener(string eventName, UnityAction<object> func)
-
-    // {
-    //     if (EventDic.ContainsKey(eventName))
-    //        EventDic[eventName] -= func;
-    // }
-    // public void ClearEventDic() 
-    // {
-    //      EventDic.Clear();
-    // }
-    // public void ClearEvent(string eventName) 
-    // {
-    //   if (EventDic.ContainsKey(eventName)) 
-    //       EventDic.Remove(eventName);
-    // }
-    #endregion
-    #region 方案二：通过泛型接口实现有无参数委托的传递
+    private EventCenter() { }
+    
     private Dictionary<E_EventType, IEventInfo> eventDic = new Dictionary<E_EventType, IEventInfo>();
 
 
@@ -178,5 +142,4 @@ public enum E_EventType
     E_pkayerDead,
 }
 
-#endregion
 
