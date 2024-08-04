@@ -38,8 +38,8 @@ public class TestEditor : Editor
 
         //对象数据类型绘制/////////////////////////////////////////////////////////////////////////////
         testComponent.weapon = EditorGUILayout.ObjectField("武器", testComponent.weapon, typeof(GameObject), true) as GameObject;
-        testComponent.texture = EditorGUILayout.ObjectField("贴图", testComponent.texture, typeof(Texture), true) as Texture;
-        //标题，原始组件的值，成员变量的类型，是否可以将对象拖给这个变量
+        testComponent.texture = EditorGUILayout.ObjectField("贴图", testComponent.texture, typeof(Texture), false) as Texture;
+        //标题，原始组件的值，成员变量的类型，是否可以将场景中对象拖给这个变量，注意纹理来源于project而非场景中物体，故用false
 
         //枚举数据类型绘制////////////////////////////////////////////////////////////////////////////
         testComponent.testEnum=(E_testEnum)EditorGUILayout.EnumPopup("玩家职业",testComponent.testEnum);

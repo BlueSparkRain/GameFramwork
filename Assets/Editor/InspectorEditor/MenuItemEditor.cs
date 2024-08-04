@@ -8,9 +8,9 @@ using UnityEditor;
 /// </summary>
 public class MenuItemEditor
 {
-    [MenuItem("工具/导出AB资源包")]
-    static void BuildAB() 
-    {
-        Debug.Log("导出AB资源包");
-    }
+    //[MenuItem("工具/导出AB资源包")]
+    //static void BuildAB() 
+    //{
+    //    Debug.Log("导出AB资源包");
+    //}
 }

@@ -31,6 +31,10 @@ public class PopWindowEditor : EditorWindow
         
 
     }
+
+    /// <summary>
+    /// 绘制弹窗内容
+    /// </summary>
     private void OnGUI()
     {
         if (GUILayout.Button("窗口按钮测试")) 
