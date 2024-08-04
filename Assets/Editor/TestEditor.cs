@@ -53,7 +53,22 @@ public class TestEditor : Editor
         {
             EditorGUILayout.HelpBox("滑动条即将到顶",MessageType.Error);  
         }
-    
+        if(testComponent.processSlider<=20)
+        {
+            EditorGUILayout.HelpBox("滑动条即将到底", MessageType.Warning);
+        }
+
+        //按钮绘制（默认纵向绘制，一行占一个按钮）
+       if( GUILayout.Button("来个按钮"))
+        {
+            Debug.Log("点击了按钮");
+        };
+
+        //开启横向绘制（一行可多个按钮）
+        GUILayout.BeginHorizontal();  
+        //关闭横向绘制
+        GUILayout.EndHorizontal();
+
     }
 
 
