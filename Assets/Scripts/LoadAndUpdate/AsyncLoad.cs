@@ -7,13 +7,13 @@ public class AsyncLoad : MonoBehaviour
 {
     public Image ResAsyncLoadImage;
     public Image ABAsyncLoadImage;
-
+    
 
     void Start()
     {
-        ResAsyncLoadImage.sprite = Resources.Load("textphoto") as Sprite;
-      //  StartCoroutine(AsyncLoadResources());
-       // StartCoroutine(AsyncLoadAB());
+       // ResAsyncLoadImage.sprite = Resources.Load("textphoto") as Sprite;
+        StartCoroutine(AsyncLoadResources());
+        StartCoroutine(AsyncLoadAB());
     }
 
     /// <summary>
@@ -23,19 +23,24 @@ public class AsyncLoad : MonoBehaviour
     IEnumerator AsyncLoadResources() 
     {
         //开启异步加载
-        ResourceRequest rr = Resources.LoadAsync<Sprite>("textphoto");
+        ResourceRequest rr = Resources.LoadAsync<Sprite>("Sprites/testphoto");
         //等待加载完成继续执行
         yield return rr;
+        Debug.Log("显示异步加载");
         //显示资源
+        
         ResAsyncLoadImage.sprite=rr.asset as Sprite ;
     
     }
     IEnumerator AsyncLoadAB()
     {
-        AssetBundleCreateRequest abcr = AssetBundle.LoadFromFileAsync(ConfigAB.ABPath + "/old/test");
+        AssetBundleCreateRequest abcr = AssetBundle.LoadFromFileAsync(ConfigAB.ABPath + "/new/test");
+        //等待异步加载出ab包
         yield return abcr;
-        ABAsyncLoadImage.sprite = abcr.assetBundle.LoadAsset< Sprite>("textphoto");
-        
+        //使用ab包中的资源
+        AssetBundleRequest rr = abcr.assetBundle.LoadAssetAsync<Sprite>("testphoto");
+        yield return rr;
 
+        ABAsyncLoadImage.sprite=rr.asset as Sprite;
     }
 }

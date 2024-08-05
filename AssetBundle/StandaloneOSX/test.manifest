@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3376825045
+CRC: 1686919597
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2c2ec64025a8d035e35108c54cf1b3ee
+    Hash: 9829333295240f7052536963ef85b530
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2d8df09e698f722ada1caa03d3413830
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 2c2ec64025a8d035e35108c54cf1b3ee
+    Hash: 9829333295240f7052536963ef85b530
 HashAppended: 0
 ClassTypes:
 - Class: 28
@@ -18,5 +18,5 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/AB/Art/2D/testphoto.jpg
+- Assets/Resources/Sprites/testphoto.jpg
 Dependencies: []

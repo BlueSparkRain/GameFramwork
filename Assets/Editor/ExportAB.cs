@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System.Drawing.Printing;
 public class ExportAB 
 {
 
@@ -32,11 +33,13 @@ public class ExportAB
 
     static void Export(BuildTarget platform) 
     {
+        
         string path = Application.dataPath;
-        path=path.Substring(0, path.Length-6)+"AB";//截取至Assets文件夹，拼接上自己想要放入的文件夹名
-
+       //截取至Assets文件夹，拼接上自己想要放入的文件夹名
+        path = ConfigAB.ABPath+ platform;
+      
         //防止路径不存在
-        if (Directory.Exists(path)) 
+        if (!Directory.Exists(path)) 
         {
         Directory.CreateDirectory(path);
         }
@@ -46,6 +49,7 @@ public class ExportAB
             //注意：BuildAssetBundleOptions该类型枚举是按异或位运算，的多选枚举，以二进制来理解多选，十进制理解单选
             BuildAssetBundleOptions.ChunkBasedCompression|BuildAssetBundleOptions.ForceRebuildAssetBundle,// ab包将采用LZ4压缩格式 （保险）强制重新导出
             platform);//支持window平台
+        Debug.Log(path);
         Debug.Log(platform+"导出AB包成功");
     }
 }
