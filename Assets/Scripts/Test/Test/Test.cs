@@ -16,9 +16,11 @@ public class Test : MonoBehaviour
 
     void Start()
     {
-        ResourcesManager.Instance.LoadAsync<GameObject>("Cap", (a) => { Instantiate(a); });
-        ResourcesManager.Instance.LoadAsync("Cap",typeof(GameObject), (a) => { Instantiate(a);
-        });
+        //ResourcesManager.Instance.LoadAsync<GameObject>("Cap", (a) => { Instantiate(a); });
+        //ResourcesManager.Instance.LoadAsync("Cap", typeof(GameObject), (a) =>
+        //{
+        //    Instantiate(a);
+        //});
 
     }
 
