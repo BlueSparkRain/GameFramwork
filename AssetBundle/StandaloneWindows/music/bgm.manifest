@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 3533152510
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: ea18383d48df6321710853cd0ae5e7ab
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 9a2ca7bdbd1871f7131daf57de908e0c
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: ea18383d48df6321710853cd0ae5e7ab
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/AB/Art/music/bgm/testbgm2.mp3
+- Assets/AB/Art/music/bgm/testbgm1.mp3
+Dependencies: []

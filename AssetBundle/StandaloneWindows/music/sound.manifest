@@ -1,0 +1,20 @@
+ManifestFileVersion: 0
+CRC: 2547930641
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: fe597e52c6817b05a10560e0b6b4f06b
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 9a2ca7bdbd1871f7131daf57de908e0c
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: fe597e52c6817b05a10560e0b6b4f06b
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/AB/Art/music/sound/testsound1.wav
+Dependencies: []

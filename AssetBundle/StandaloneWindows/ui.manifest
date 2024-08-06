@@ -3,13 +3,13 @@ CRC: 2019255544
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6605708921d76f2053ed063148bdc4c9
+    Hash: 29f6425431a95c150cf9f7b087537bb2
   TypeTreeHash:
     serializedVersion: 2
     Hash: 32a4e4b41a38784d16f29fcb22d3af50
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 6605708921d76f2053ed063148bdc4c9
+    Hash: 29f6425431a95c150cf9f7b087537bb2
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -72,5 +72,5 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
 Assets:
-- Assets/AB/Art/UI/TestPanel.prefab
+- Assets/AB/Art/ui/TestPanel.prefab
 Dependencies: []

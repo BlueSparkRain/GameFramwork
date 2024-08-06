@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3829965848
+CRC: 2189578424
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -10,4 +10,10 @@ AssetBundleManifest:
       Dependencies: {}
     Info_2:
       Name: ui
+      Dependencies: {}
+    Info_3:
+      Name: music/bgm
+      Dependencies: {}
+    Info_4:
+      Name: music/sound
       Dependencies: {}
