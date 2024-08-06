@@ -51,7 +51,6 @@ public abstract class BasePanel : MonoBehaviour
     /// </summary>
     public abstract void HidePanel();
 
-
     /// <summary>
     /// 获取指点名称以及指定类型的UI控件
     /// </summary>
@@ -74,18 +73,15 @@ public abstract class BasePanel : MonoBehaviour
         }
     }
 
-
     protected virtual void ClickButton(string buttonName)
     {
     }
-
     protected void SliderValueChange(string sliderName, float value)
     {
     }
     protected void ToggleValueChange(string sliderName, bool value)
     {
     }
-
 
     private void FindChildrenControl<T>() where T : UIBehaviour
     {
@@ -125,9 +121,6 @@ public abstract class BasePanel : MonoBehaviour
                     }
                 }
             }
-
         }
-
     }
-
 }

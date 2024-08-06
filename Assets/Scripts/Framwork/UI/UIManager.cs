@@ -188,6 +188,24 @@ public class UIManager : BaseSingletonManager<UIManager>
         return null;
     }
 
+    /// <summary>
+    /// 为控件添加自定义事件
+    /// </summary>
+    /// <param name="control">对应控件</param>
+    /// <param name="type">UI事件类型</param>
+    /// <param name="callBack">相应的逻辑</param>
+    public static void AddCustomEventListener(UIBehaviour control,EventTriggerType type,UnityAction<BaseEventData> callBack)
+    {
+        EventTrigger trigger = control.GetComponent<EventTrigger>();
+        //保证一个控件上只会挂载一个eventtrigger
+        if (trigger==null)
+            trigger = control.gameObject.AddComponent<EventTrigger>();
+            
+        EventTrigger.Entry entry=new EventTrigger.Entry();
+        entry.eventID = type;
+        entry.callback.AddListener(callBack);
 
+        trigger.triggers.Add(entry);
+    } 
 
 }
