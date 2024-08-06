@@ -16,6 +16,8 @@ public class Test : MonoBehaviour
 
     void Start()
     {
+       
+        //  Instantiate( ABManager.Instance.LoadABRes<GameObject>("ui", "Sphere", E_ABPlatformType.Window));
         //ResourcesManager.Instance.LoadAsync<GameObject>("Cap", (a) => { Instantiate(a); });
         //ResourcesManager.Instance.LoadAsync("Cap", typeof(GameObject), (a) =>
         //{
@@ -23,8 +25,22 @@ public class Test : MonoBehaviour
         //});
 
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S)) 
+        {
+            UIManager.Instance.ShowPanel<TestPanel>(E_ABPlatformType.Window, E_UILayer.Top, (panel) =>
+            {
+                panel.TestFun();
+            });
+        }
+        if (Input.GetKeyDown(KeyCode.H)) 
+        {
+            UIManager.Instance.HidePanel<TestPanel>();
+        }
+    }
 
-  
+
 }
 public enum E_testEnum 
 {

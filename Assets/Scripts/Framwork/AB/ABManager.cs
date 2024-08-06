@@ -1,45 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
+
+public enum E_ABPlatformType
+{
+    iOS, Android, Mac, Window
+}
+
 /// <summary>
-/// 让外部方柏霓进行资源加载
+/// 让外部方便进行资源加载
 /// </summary>
 public class ABManager : MonoSingleton<ABManager>
 {
-    private Dictionary<string,AssetBundle> abDic = new Dictionary<string,AssetBundle>();
+    private Dictionary<string, AssetBundle> abDic = new Dictionary<string, AssetBundle>();
 
-    private AssetBundle mainAB=null;
-    private AssetBundleManifest manifest=null;
-   /// <summary>
-   /// 主包名便于修改
-   /// </summary>
-    private string MainABName 
+    private AssetBundle mainAB = null;
+    private AssetBundleManifest manifest = null;
+
+    string GetPlatformList(E_ABPlatformType platform)
     {
-        get {
-#if UNITY_IOS
-            return "IOS";
-#elif UNITY_ANDROID
-            return "Android";
-#else 
-            return "PC";
-#endif
-        } 
+        switch (platform)
+        {
+            case E_ABPlatformType.iOS:
+                return ConfigAB.AB_iOS_List;
+            case E_ABPlatformType.Android:
+                return ConfigAB.AB_Android_List;
+            case E_ABPlatformType.Mac:
+                return ConfigAB.AB_Mac_List;
+            case E_ABPlatformType.Window:
+                return ConfigAB.AB_StandaloneWindows_List;
+            default:
+                return ConfigAB.AB_StandaloneWindows_List;
+        }
     }
-
     /// <summary>
-    /// 加载AB包
+    /// 根据包名加载AB包
     /// </summary>
-    /// <param name="abName"></param>
-    public void LoadAB(string abName) 
+    /// <param name="abName">ab包名称</param>
+    /// <param name="platformType">路径平台文件夹前缀</param>
+    public void LoadAB(string abName, E_ABPlatformType platformType)
     {
+        string abPlatformPath = GetPlatformList(platformType);
+
         //先加载依赖包
         if (manifest == null)
         {
             //加载主ab包（AB）
-            mainAB = AssetBundle.LoadFromFile(ConfigAB.ABPath + MainABName);
+            mainAB = AssetBundle.LoadFromFile(ConfigAB.ABPath + abPlatformPath + abPlatformPath.Substring(0, abPlatformPath.Length - 1));
 
             //获取主ab包的配置文件（AB.manifest）
             manifest = mainAB.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
@@ -63,7 +72,7 @@ public class ABManager : MonoSingleton<ABManager>
         AssetBundle newAB;
         if (!abDic.ContainsKey(abName))
         {
-            newAB = AssetBundle.LoadFromFile(ConfigAB.ABPath + abName);
+            newAB = AssetBundle.LoadFromFile(ConfigAB.ABPath + abPlatformPath + abName);
             abDic.Add(abName, newAB);
         }
     }
@@ -75,18 +84,14 @@ public class ABManager : MonoSingleton<ABManager>
     /// </summary>
     /// <param name="abName">ab包名称</param>
     /// <param name="resName">加载资源名称</param>
-    public Object LoadABRes(string abName,string resName)
+    public Object LoadABRes(string abName, string resName, E_ABPlatformType platformType)
     {
         //加载AB包
-        LoadAB(abName);
+        LoadAB(abName, platformType);
         //加载该ab包内资源
         //判断资源是否是Gameobject，如果是直接返回预制体实例化
-        Object obj=abDic[abName].LoadAsset(resName);
-        if (obj is GameObject)
-            return Instantiate(obj);
-        else
-            return  obj;
-       
+        Object obj = abDic[abName].LoadAsset(resName);
+        return obj;
     }
 
     /// <summary>
@@ -96,18 +101,14 @@ public class ABManager : MonoSingleton<ABManager>
     /// <param name="resName"></param>
     /// <param name="type"></param>
     /// <returns></returns>
-    public Object LoadABRes(string abName, string resName,System.Type type) 
+    public Object LoadABRes(string abName, string resName, System.Type type, E_ABPlatformType platformType)
     {
         //加载AB包
-        LoadAB(abName);
+        LoadAB(abName, platformType);
         //加载该ab包内资源
         //判断资源是否是Gameobject，如果是直接返回预制体实例化
-        Object obj = abDic[abName].LoadAsset(resName,type);
-        if (obj is GameObject)
-            return Instantiate(obj);
-        else
-            return obj;
-
+        Object obj = abDic[abName].LoadAsset(resName, type);
+        return obj;
     }
 
     /// <summary>
@@ -117,17 +118,14 @@ public class ABManager : MonoSingleton<ABManager>
     /// <param name="abName"></param>
     /// <param name="resName"></param>
     /// <returns></returns>
-    public T LoadABRes<T>(string abName, string resName) where T :Object
+    public T LoadABRes<T>(string abName, string resName, E_ABPlatformType platformType) where T : Object
     {
         //加载AB包
-        LoadAB(abName);
+        LoadAB(abName, platformType);
         //加载该ab包内资源
         //判断资源是否是Gameobject，如果是直接返回预制体实例化
         T obj = abDic[abName].LoadAsset<T>(resName);
-        if (obj is GameObject)
-            return Instantiate(obj);
-        else
-            return obj;
+        return obj;
     }
 
     //异步加载（）
@@ -138,54 +136,46 @@ public class ABManager : MonoSingleton<ABManager>
     /// <param name="abName"></param>
     /// <param name="resName"></param>
     /// <param name="callBack"></param>
-    public void LoadResAsync(string abName,string resName,UnityAction<object> callBack) 
+    public void LoadResAsync(string abName, string resName, UnityAction<object> callBack, E_ABPlatformType platformType)
     {
-        StartCoroutine(ReallyLoadResAsync( abName,  resName,  callBack));
+        StartCoroutine(ReallyLoadResAsync(abName, resName, callBack, platformType));
     }
-    private IEnumerator ReallyLoadResAsync(string abName, string resName, UnityAction<object> callBack)
+    private IEnumerator ReallyLoadResAsync(string abName, string resName, UnityAction<object> callBack, E_ABPlatformType platformType)
     {
         //加载AB包
-        LoadAB(abName);
+        LoadAB(abName, platformType);
         //加载该ab包内资源
         //判断资源是否是Gameobject，如果是直接返回预制体实例化
-        AssetBundleRequest abr=  abDic[abName].LoadAssetAsync(resName);
+        AssetBundleRequest abr = abDic[abName].LoadAssetAsync(resName);
         yield return abr;
         //加载完成后通过委托传递给外部来使用
-        if (abr.asset is GameObject)
-          callBack( Instantiate(abr.asset));
-        else
-            callBack(abr.asset);
-           
+        callBack(abr.asset);
     }
-   
-  
+
+
     /// <summary>
     /// 异步加载2【根据Type进行异步加载指定类型的资源】
     /// </summary>
     /// <param name="abName"></param>
     /// <param name="resName"></param>
     /// <param name="callBack"></param>
-    public void LoadResAsync(string abName, string resName,System.Type type, UnityAction<object> callBack)
+    public void LoadResAsync(string abName, string resName, System.Type type, UnityAction<object> callBack, E_ABPlatformType platformType)
     {
-        StartCoroutine(ReallyLoadResAsync(abName, resName, callBack));
+        StartCoroutine(ReallyLoadResAsync(abName, resName, callBack, platformType));
     }
-    private IEnumerator ReallyLoadResAsync(string abName, string resName,System.Type type, UnityAction<object> callBack)
+    private IEnumerator ReallyLoadResAsync(string abName, string resName, System.Type type, UnityAction<object> callBack, E_ABPlatformType platformType)
     {
         //加载AB包
-        LoadAB(abName);
+        LoadAB(abName, platformType);
         //加载该ab包内资源
         //判断资源是否是Gameobject，如果是直接返回预制体实例化
-        AssetBundleRequest abr = abDic[abName].LoadAssetAsync(resName,type);
+        AssetBundleRequest abr = abDic[abName].LoadAssetAsync(resName, type);
         yield return abr;
         //加载完成后通过委托传递给外部来使用
-        if (abr.asset is GameObject)
-            callBack(Instantiate(abr.asset));
-        else
-            callBack(abr.asset);
-
+         callBack(abr.asset);
     }
 
-   
+
     /// <summary>
     /// 异步加载3【根据泛型加载】
     /// </summary>
@@ -193,32 +183,28 @@ public class ABManager : MonoSingleton<ABManager>
     /// <param name="abName"></param>
     /// <param name="resName"></param>
     /// <param name="callBack"></param>
-    public void LoadResAsync<T>(string abName, string resName, UnityAction<T> callBack) where T : Object
+    public void LoadResAsync<T>(string abName, string resName, UnityAction<T> callBack, E_ABPlatformType platformType) where T : Object
     {
-        StartCoroutine(ReallyLoadResAsync<T>(abName, resName, callBack));
-     }
-    private IEnumerator ReallyLoadResAsync<T>(string abName, string resName, UnityAction<T> callBack) where T:Object
+        StartCoroutine(ReallyLoadResAsync<T>(abName, resName, callBack, platformType));
+    }
+    private IEnumerator ReallyLoadResAsync<T>(string abName, string resName, UnityAction<T> callBack, E_ABPlatformType platformType) where T : Object
     {
         //加载AB包
-        LoadAB(abName);
+        LoadAB(abName, platformType);
         //加载该ab包内资源
         //判断资源是否是Gameobject，如果是直接返回预制体实例化
         AssetBundleRequest abr = abDic[abName].LoadAssetAsync<T>(resName);
         yield return abr;
         //加载完成后通过委托传递给外部来使用
-        if (abr.asset is GameObject)
-            callBack(Instantiate(abr.asset) as T) ;
-        else
-            callBack(abr.asset as T);
+        callBack(abr.asset as T);
     }
 
 
 
-
     //单个包卸载
-    public void Unload(string abName) 
+    public void Unload(string abName)
     {
-    if (abDic.ContainsKey(abName)) 
+        if (abDic.ContainsKey(abName))
         {
             abDic[abName].Unload(false);
             abDic.Remove(abName);
@@ -227,7 +213,7 @@ public class ABManager : MonoSingleton<ABManager>
     }
 
     //所有包卸载
-    public void ClearAB() 
+    public void ClearAB()
     {
         AssetBundle.UnloadAllAssetBundles(false);
         abDic.Clear();
@@ -237,7 +223,7 @@ public class ABManager : MonoSingleton<ABManager>
     }
 
     //释放游离垃圾资源
-    void Recycling() 
+    void Recycling()
     {
         Resources.UnloadUnusedAssets();
     }

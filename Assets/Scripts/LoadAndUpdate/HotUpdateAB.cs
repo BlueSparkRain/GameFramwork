@@ -9,7 +9,7 @@ public class HotUpdateAB : MonoBehaviour
     void Start()
     {
        
-        GameObject obj = ABManager.Instance.LoadABRes("modle", "Sphere", typeof(GameObject)) as GameObject;
+      //  GameObject obj = ABManager.Instance.LoadABRes("modle", "Sphere", typeof(GameObject)) as GameObject;
       
     }
 

@@ -10,6 +10,7 @@ public class ResourcesManager : BaseSingletonManager<ResourcesManager>
 {
     private ResourcesManager() { }
     
+    
 
     /// <summary>
     /// 通过泛型进行异步加载

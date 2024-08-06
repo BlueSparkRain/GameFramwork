@@ -16,4 +16,6 @@ public class ConfigAB : MonoBehaviour
     public static string AB_Android_List = "Android/";
     public static string AB_Mac_List = "StandaloneOSX/";
     public static string AB_StandaloneWindows_List = "StandaloneWindows/";
+
+    
 }

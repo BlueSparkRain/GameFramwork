@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 864441593
+CRC: 3829965848
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -7,4 +7,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_1:
       Name: modle
+      Dependencies: {}
+    Info_2:
+      Name: ui
       Dependencies: {}
