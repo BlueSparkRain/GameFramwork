@@ -141,6 +141,7 @@ public enum E_EventType
     /// </summary>
     E_pkayerDead,
     E_sceneLoad,
+    E_dataSave,
     
 }
 
