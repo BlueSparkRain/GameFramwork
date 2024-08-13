@@ -8,25 +8,25 @@ using UnityEngine.Events;
 public class EventCenter : BaseSingletonManager<EventCenter>
 {
     /// <summary>
-    /// EventCenterÖ÷Òª×÷ÓÃ£º½µµÍ³ÌĞòñîºÏ¶È£¬Ê¹²»Í¬Ä£¿é¸ôÀë£¬²»ĞèÒªÖ±½ÓÒıÓÃ»òÒÀÀµ±Ë´ËµÄ¾ßÌåÊµÏÖ
-    /// »ù±¾Ô­Àí£ºÖĞĞÄ»¯»úÖÆ£¬¹Û²ìÕßÄ£Ê½£¬ËÉñîºÏÍ¨ĞÅ
-    /// ¹Ø¼ü·½·¨£º
-    /// 1.´¥·¢£¨·Ö·¢£©ÊÂ¼ş
-    /// 2.Ìí¼Ó¡¢ÒÆ³ıÊÂ¼ş¼àÌıÕß
-    /// 3.Çå³ıËùÓĞÊÂ¼ş¼àÌıÕß
+    /// EventCenterä¸»è¦ä½œç”¨ï¼šé™ä½ç¨‹åºè€¦åˆåº¦ï¼Œä½¿ä¸åŒæ¨¡å—éš”ç¦»ï¼Œä¸éœ€è¦ç›´æ¥å¼•ç”¨æˆ–ä¾èµ–å½¼æ­¤çš„å…·ä½“å®ç°
+    /// åŸºæœ¬åŸç†ï¼šä¸­å¿ƒåŒ–æœºåˆ¶ï¼Œè§‚å¯Ÿè€…æ¨¡å¼ï¼Œæ¾è€¦åˆé€šä¿¡
+    /// å…³é”®æ–¹æ³•ï¼š
+    /// 1.è§¦å‘ï¼ˆåˆ†å‘ï¼‰äº‹ä»¶
+    /// 2.æ·»åŠ ã€ç§»é™¤äº‹ä»¶ç›‘å¬è€…
+    /// 3.æ¸…é™¤æ‰€æœ‰äº‹ä»¶ç›‘å¬è€…
     /// </summary>
     private EventCenter() { }
     
     private Dictionary<E_EventType, IEventInfo> eventDic = new Dictionary<E_EventType, IEventInfo>();
 
 
-    /*ÎŞ²Î****************************************************************/
+    /*æ— å‚****************************************************************/
 
     public void AddEventListener(E_EventType name, UnityAction action)
     {
         if (eventDic.ContainsKey(name))
         {
-            //ÒòÎªÊÇ¸¸Àà£¨IEventInfo£©×°×ÓÀà£¨EventInfo£©£¬ÏÈasÎª×ÓÀà£¨EventInfo£©£¬ÔÙÊ¹ÓÃÆäÖĞµÄactions
+            //å› ä¸ºæ˜¯çˆ¶ç±»ï¼ˆIEventInfoï¼‰è£…å­ç±»ï¼ˆEventInfoï¼‰ï¼Œå…ˆasä¸ºå­ç±»ï¼ˆEventInfoï¼‰ï¼Œå†ä½¿ç”¨å…¶ä¸­çš„actions
             (eventDic[name] as EventInfo).actions += action;
         }
         else
@@ -55,12 +55,12 @@ public class EventCenter : BaseSingletonManager<EventCenter>
     }
 
     
-   /*ÓĞ²Î****************************************************************/
+   /*æœ‰å‚****************************************************************/
     public void AddEventListener<T>(E_EventType name, UnityAction<T> action)
     {
         if (eventDic.ContainsKey(name))
         {
-            //ÒòÎªÊÇ¸¸Àà£¨IEventInfo£©×°×ÓÀà£¨EventInfo<T>£©£¬ÏÈasÎª×ÓÀà£¨EventInfo<T>£©£¬ÔÙÊ¹ÓÃÆäÖĞµÄactions
+            //å› ä¸ºæ˜¯çˆ¶ç±»ï¼ˆIEventInfoï¼‰è£…å­ç±»ï¼ˆEventInfo<T>ï¼‰ï¼Œå…ˆasä¸ºå­ç±»ï¼ˆEventInfo<T>ï¼‰ï¼Œå†ä½¿ç”¨å…¶ä¸­çš„actions
             (eventDic[name] as EventInfo<T>).actions += action;
         }
         else
@@ -94,12 +94,12 @@ public class EventCenter : BaseSingletonManager<EventCenter>
 }
 
 
-//ÊÇÎªÁË°ü¹ü¶ÔÓ¦¹Û²ìÕß º¯ÊıÎ¯ÍĞµÄ Àà
+//æ˜¯ä¸ºäº†åŒ…è£¹å¯¹åº”è§‚å¯Ÿè€… å‡½æ•°å§”æ‰˜çš„ ç±»
 public class EventInfo : IEventInfo
 {
     public UnityAction actions;
 
-    //ÕæÕı¹Û²ìÕß ¶ÔÓ¦µÄ º¯ÊıĞÅÏ¢ ¼ÇÂ¼ÔÚÆäÖĞ
+    //çœŸæ­£è§‚å¯Ÿè€… å¯¹åº”çš„ å‡½æ•°ä¿¡æ¯ è®°å½•åœ¨å…¶ä¸­
     public EventInfo(UnityAction action)
     {
         actions += action;
@@ -118,7 +118,7 @@ public class EventInfo<T> : IEventInfo
 }
 
 
-//´Ë½Ó¿ÚÓÃÓÚÀïÊÏÌæ»»Ô­Ôò ×°ÔØ×ÓÀàµÄ ¸¸Àà£¬Ä¿±êµ÷¸¸Ö´ĞĞ×ÓÖĞµÄ
+//æ­¤æ¥å£ç”¨äºé‡Œæ°æ›¿æ¢åŸåˆ™ è£…è½½å­ç±»çš„ çˆ¶ç±»ï¼Œç›®æ ‡è°ƒçˆ¶æ‰§è¡Œå­ä¸­çš„
 public interface IEventInfo
 {
 
@@ -127,7 +127,7 @@ public interface IEventInfo
 
 
 /// <summary>
-/// Ìí¼Ó¹Û²ìÕßÊ±Ê¹ÓÃ±äÁ¿´æ´¢×Ö·û´®±ãÓÚĞŞ¸Ä£¬¼õÉÙ³ö´íµÄ¿ÉÄÜ
+/// æ·»åŠ è§‚å¯Ÿè€…æ—¶ä½¿ç”¨å˜é‡å­˜å‚¨å­—ç¬¦ä¸²ä¾¿äºä¿®æ”¹ï¼Œå‡å°‘å‡ºé”™çš„å¯èƒ½
 /// </summary>
 public static class EventCenterConstString 
 {
@@ -137,9 +137,11 @@ public static class EventCenterConstString
 public enum E_EventType 
 {
     /// <summary>
-    /// ²ÎÊı£ºplayer
+    /// å‚æ•°ï¼šplayer
     /// </summary>
     E_pkayerDead,
+    E_sceneLoad,
+    
 }
 
 

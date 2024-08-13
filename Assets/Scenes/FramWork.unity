@@ -130,6 +130,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2315382420182373385, guid: efa37514054214a4aa79288469e80a7f, type: 3}
+      propertyPath: m_Materials.Array.data[7]
+      value: 
+      objectReference: {fileID: 2100000, guid: f28eb92db5e504a4cb75688cb3f2f5d5, type: 2}
     - target: {fileID: 3533885439099023024, guid: efa37514054214a4aa79288469e80a7f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.285
@@ -315,7 +319,7 @@ GameObject:
   - component: {fileID: 731669427}
   - component: {fileID: 731669431}
   m_Layer: 31
-  m_Name: Plane
+  m_Name: "\u8282\u70B9\u7F16\u8F91\u5E73\u9762Plane"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
