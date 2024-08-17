@@ -13,7 +13,7 @@ public class TestEditor : Editor
 {
     //获得需要编辑显示的组件
     private Test testComponent;
-
+     
     //当关联组件所在对象被选中或组件被添加时调用
     private void OnEnable()
     {
