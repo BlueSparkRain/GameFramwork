@@ -29,7 +29,7 @@ public class TestEditor : Editor
     public override void OnInspectorGUI()
     {
         //标题显示
-        EditorGUILayout.LabelField("测试徐子竣");
+        EditorGUILayout.LabelField("测试拓展脚本");
 
         //简单数据类型绘制////////////////////////////////////////////////////////////////////////////
         testComponent.ID=EditorGUILayout.IntField("角色ID", testComponent.ID);
@@ -71,7 +71,20 @@ public class TestEditor : Editor
 
     }
 
+    [MenuItem("UIPanel/Show")]
+    static void ShowPanel()
+    {
+        UIManager.Instance.ShowPanel<TestPanel>(E_ABPlatformType.Window, E_UILayer.Top, (panel) =>
+        {
+            panel.TestFun();
+        });
+    }
 
+    [MenuItem("UIPanel/Hide")]
+    static void HidePanel()
+    {
+        UIManager.Instance.HidePanel<TestPanel>();
+    }
 
     void OtherDataDraw(string originalDataName,string processedHeadName) 
     {

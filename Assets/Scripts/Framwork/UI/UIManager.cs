@@ -85,7 +85,8 @@ public class UIManager : BaseSingletonManager<UIManager>
     /// <param name="callBack">由于可能是异步加载，故通过委托回调形式将加载完成的面板传递出去进行使用</param>
     /// <param name="isSync"></param>
     public void ShowPanel<T>(E_ABPlatformType paltformType, E_UILayer layer = E_UILayer.Middle, UnityAction<T> callBack = null, bool isSync = false) where T : BasePanel
-    {
+    { uiCamera.gameObject.SetActive(true);
+
         //获取面板名，预制体名和面板类名需保持一致
         string panelName = typeof(T).Name;
         BasePanel panel;
@@ -122,8 +123,8 @@ public class UIManager : BaseSingletonManager<UIManager>
         {
             panelDic.Add(panelName, panel);
         }
-
-        //经本人测试采用异步加载会导致相同逻辑在两帧内重复执行，故舍弃下面的异步加载方案
+       
+        //经测试采用异步加载会导致相同逻辑在两帧内重复执行，故舍弃下面的异步加载方案
         ////不存在面板 加载面板
         //ABManager.Instance.LoadResAsync<GameObject>("ui", panelName, (res) =>
         //{
@@ -160,7 +161,9 @@ public class UIManager : BaseSingletonManager<UIManager>
         if (panelDic.ContainsKey(panelName))
         {
          panelDic[panelName].HidePanel();
-           
+         
+         uiCamera.gameObject.SetActive(false);
+         
             if (isDestroy) 
             {
                 //选择销毁时才会移出字典

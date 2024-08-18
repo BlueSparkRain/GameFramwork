@@ -7,17 +7,17 @@ public class TestPanel : BasePanel
 {
     public override void HidePanel()
     {
-        Debug.Log("CloseMe：关闭面板时执行逻辑");
+        Debug.Log("CloseMe锛氬叧闂潰鏉挎椂鎵ц閫昏緫");
     }
 
     public override void ShowPanel()
     {
-        Debug.Log("ShowMe：显示面板时执行逻辑");
+        Debug.Log("ShowMe锛氭樉绀洪潰鏉挎椂鎵ц閫昏緫");
     }
 
     public void TestFun() 
     {
-        Debug.Log("测试面板内方法执行逻辑");
+        Debug.Log("娴嬭瘯闈㈡澘鍐呮柟娉曟墽琛岄�昏緫");
     }
    
 }

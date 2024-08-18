@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Test : MonoBehaviour
@@ -68,20 +69,10 @@ public class Test : MonoBehaviour
         }
 
     }
+    
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S)) 
-        {
-            UIManager.Instance.ShowPanel<TestPanel>(E_ABPlatformType.Window, E_UILayer.Top, (panel) =>
-            {
-                panel.TestFun();
-            });
-        }
-        if (Input.GetKeyDown(KeyCode.H)) 
-        {
-            UIManager.Instance.HidePanel<TestPanel>();
-        }
-      
+       
     }
 
 
