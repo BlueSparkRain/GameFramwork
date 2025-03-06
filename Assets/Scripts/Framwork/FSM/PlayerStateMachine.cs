@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class PlayerStateMachine : FSM_StateMachine<Player>
 {
     public override void ChangeState(FSM_States<Player> newState)

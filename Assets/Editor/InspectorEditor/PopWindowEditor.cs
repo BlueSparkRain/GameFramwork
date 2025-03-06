@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Codice.Client.BaseCommands;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 /// <summary>
 /// 一般的插件就是通过将监视器拓展应用在窗口内部实现的
@@ -29,11 +26,11 @@ public class PopWindowEditor : EditorWindow
 
 
     }
- 
+
     //窗口开启期间每帧调用
     private void Update()
     {
-     
+
 
     }
 
@@ -59,5 +56,5 @@ public class PopWindowEditor : EditorWindow
         Debug.Log(Selection.activeGameObject.name);
     }
 
-  
+
 }

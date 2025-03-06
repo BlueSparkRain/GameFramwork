@@ -26,7 +26,7 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
                 //非挂载式单例在被调用时直接创建
                   GameObject newManager=new GameObject(typeof(T) + "SingleManager");
                     instance = newManager.AddComponent<T>();
-                    // instance.Init(newManager);
+                    instance.Init(newManager);
                     DontDestroyOnLoad(newManager);
                 }
             }  
@@ -52,6 +52,7 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
 
     public virtual void Init(GameObject newManager)
     {
+        //实际使用的初始化代码
     }
 }
 
